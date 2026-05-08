@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IntroduccionCsharp.Models;
+using IntroduccionCsharp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +10,6 @@ namespace IntroduccionCsharp.Controllers
 {
     public class PruebaController : Controller
     {
-        // GET: Prueba
         public ActionResult Index()
         {
             return View();
@@ -21,8 +22,28 @@ namespace IntroduccionCsharp.Controllers
         public ActionResult Suma(string x, String y, String r1)
         {
             int res = Convert.ToInt16(x) + Convert.ToInt16(y);
-            ViewBag.Res=Convert.ToString(res);
+            ViewBag.Res = Convert.ToString(res);
             return View();
         }
+
+        public ActionResult Calculos(OperasBas op)
+        {
+            op.Suma();
+
+
+            return View(op);
+        }
+
+
+        public ActionResult MuestraPeliculas()
+        {
+            var peliculasService = new PeliculaService();
+            var model = peliculasService.ObtenerPelicula();
+
+            return View(model);
+
+        }
+
+
     }
 }
